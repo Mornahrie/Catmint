@@ -1,0 +1,49 @@
+﻿@using Catmint.ViewModels
+@using Catmint.Models
+@model MenuViewModel
+
+@{
+}
+
+<div>
+
+    @foreach (var categ in Model.Categories)
+    {
+        <h3>@categ.categ_name</h3>
+
+
+        @foreach (var dish in Model.Menus)
+        {
+            if (dish.category_id == categ.category_id)
+            {
+                <table class="table">
+                    <tr>
+                        <td style="width:300px">
+                            @Html.DisplayFor(modelItem => dish.dish_name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => dish.dish_price) BYN
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => dish.weight) грамм
+                        </td>
+                        @if (Get.Privelege == 1)
+                        {
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@dish.dish_id">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@dish.dish_id">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@dish.dish_id">Delete</a>
+                            </td>
+                        }
+                    </tr>
+                </table>
+            }
+        }
+
+    }
+
+</div>
+
+<div class="categ">
+</div>
+<div class="dish"></div>

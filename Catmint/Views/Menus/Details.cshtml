@@ -1,0 +1,42 @@
+﻿@model Catmint.Models.Menu
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Menu</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.category_id)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.category_id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.dish_name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.dish_name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.dish_price)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.dish_price)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.weight)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.weight)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.dish_id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

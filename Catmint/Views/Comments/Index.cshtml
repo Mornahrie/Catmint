@@ -1,0 +1,89 @@
+﻿@model IEnumerable<Catmint.Models.Comment>
+
+@{
+    ViewData["Title"] = "Index";
+}
+  
+<h1>Index</h1>
+
+<table class="table">
+    <tbody>
+        @if (Get.Privelege != 1) // не admin
+        {
+            <p>
+                <a asp-action="Create">Оставить отзыв</a>
+            </p>
+            foreach (var item in Model)
+            {
+                if (item.user_id == Get.ID) //коммы юзера
+                {
+                    <div class="comm-block">
+                        @if (item.modered == 1)
+                        {
+                            <p>На модерации.</p>
+                        }
+                        else if (item.modered == 2)
+                        {
+                            <p>Прошел модерацию.</p>
+                        }
+                        else if (item.modered == 3)
+                        {
+                            <p>Не прошел модерацию.</p>
+                        }
+                        <div class="rank-block">
+                            <div class="rating-result">
+                                @for (int i = 0; i < item.rank; i++)
+                                {
+                                    <span class="active"></span>
+                                }
+                            </div>
+                        </div>
+                        <div class="comment-block">
+                            @Html.DisplayFor(modelItem => item.comment_text)
+                        </div>
+                        <a asp-action="Edit" asp-route-id="@item.comm_id" style="color:white">Редактировать</a> |
+                        <a asp-action="Delete" asp-route-id="@item.comm_id" style="color:white">Удалить</a>
+                    </div>
+
+                }
+
+            }
+        }
+        else //admin
+        {
+            foreach (var item in Model)
+            {
+                <div class="comm-block">
+                    @if (item.modered == 1)
+                    {
+                        <p>На модерации.</p>
+                    }
+                    else if (item.modered == 2)
+                    {
+                        <p>Прошел модерацию.</p>
+                    }
+                    else if (item.modered == 3)
+                    {
+                        <p>Не прошел модерацию.</p>
+                    }
+                    <div class="rank-block">
+                        <div class="rating-result">
+                            @for (int i = 0; i < item.rank; i++)
+                            {
+                                <span class="active"></span>
+                            }
+                        </div>
+                    </div>
+                    <div class="comment-block">
+                        @Html.DisplayFor(modelItem => item.comment_text)
+                    </div>
+                    <a asp-action="Edit" asp-route-id="@item.comm_id" style="color:white">Редактировать</a> |
+                    <a asp-action="Delete" asp-route-id="@item.comm_id" style="color:white">Удалить</a>
+                </div>
+            }
+        }
+
+        
+           
+    </tbody>
+</table>

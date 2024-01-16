@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Catmint.Models.Cat>
+
+@{
+    ViewData["Title"] = "Index";
+    string ForYear(int number)
+    {
+        // Получаем последнюю цифру числа
+        int lastDigit = number % 10;
+
+        // Получаем вторую последнюю цифру числа
+        int secondLastDigit = (number / 10) % 10;
+
+        // Проверяем условия
+        if (secondLastDigit == 1 || lastDigit >= 5 || lastDigit == 0)
+        {
+            return "лет";
+        }
+        else if (lastDigit == 1)
+        {
+            return "год";
+        }
+        else
+        {
+            return "года";
+        }
+    }
+
+}
+
+<h1>Наши котики</h1>
+@if (Get.Privelege == 1)
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
+
+<div class="cat-details">
+    @foreach (var item in Model)
+    {
+        <div class="cat-block">
+            <div class="cat-image">
+                <img src="@Html.DisplayFor(modelItem => item.cat_photo)" alt="Cat Image" />
+            </div>
+            <div class="cat-info">
+                <h4 id="catName">@Html.DisplayFor(modelItem => item.cat_name)</h4>
+                <p id="catAge">@Html.DisplayFor(modelItem => item.cat_age) @ForYear(item.cat_age)</p>
+            </div>
+        </div>
+    }
+</div>

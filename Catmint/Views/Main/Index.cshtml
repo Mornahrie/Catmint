@@ -1,0 +1,100 @@
+﻿@using Catmint.ViewModels
+@using Catmint.Models
+@model MainViewModel
+
+@{
+    // Layout = "_Layout1";
+    string ForYear(int number)
+    {
+        // Получаем последнюю цифру числа
+        int lastDigit = number % 10;
+
+        // Получаем вторую последнюю цифру числа
+        int secondLastDigit = (number / 10) % 10;
+
+        // Проверяем условия
+        if (secondLastDigit == 1 || lastDigit >= 5 || lastDigit == 0)
+        {
+            return "лет";
+        }
+        else if (lastDigit == 1)
+        {
+            return "год";
+        }
+        else
+        {
+            return "года";
+        }
+    }
+}
+
+<div class="main-details">
+    <div class="comment-block">
+        <h3>
+            Адрес: ул. Кошачья, 10, г. Минск, Республика Беларусь
+            Котокафе "Catmint": +375 17 1234567
+        </h3>
+    </div>
+    <hr>
+    <div class="main-block">
+        <h1>Наши котики</h1>
+        <div class="cat-details">
+            @foreach (var item in Model.Cats)
+            {
+                <div class="cat-block">
+                    <div class="cat-image">
+                        <img src="@Html.DisplayFor(modelItem => item.cat_photo)" alt="Cat Image" />
+                    </div>
+                    <div class="cat-info">
+                        <h4 id="catName">@Html.DisplayFor(modelItem => item.cat_name)</h4>
+                        <p id="catAge">@Html.DisplayFor(modelItem => item.cat_age) @ForYear(item.cat_age)</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <hr>
+    <div class="main-block">
+        @foreach (var item in Model.Comments)
+        {
+            if (item.modered == 2) //прошедшие модерацию
+            {
+                <div class="comm-block">
+                    <div class="user-block">
+                        @foreach (var user in Model.Users)
+                        {
+                            if (item.user_id == user.user_id)
+                            {
+                                @Html.DisplayFor(modelItem => user.login)
+                            }
+                        }
+
+                    </div>
+                    <div class="rank-block">
+                        <div class="rating-result">
+                            @for (int i = 0; i < item.rank; i++)
+                            {
+                                <span class="active"></span>
+                            }
+                        </div>
+                    </div>
+                    <div class="comment-block">
+                        @Html.DisplayFor(modelItem => item.comment_text)
+                    </div>
+                </div>
+            }
+            @if (Get.ID != 0)
+            {
+                <button onclick="location.href='@Url.Action("Create","Comments")'" class="btn btn-primary mr-2">Комментировать</button>
+            }
+        }
+        
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+    }
+}

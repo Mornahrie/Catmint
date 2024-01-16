@@ -1,0 +1,137 @@
+﻿@model Catmint.Models.User
+@{
+    ViewData["Title"] = "Edit";
+    int right_id = Model.right_id;
+    string name = Model.name;
+    string surname = Model.surname;
+    string fathername = Model.fathername;
+    string date_of_birth = Model.date_of_birth.ToString("yyyy-MM-dd");
+    string phone_num = Model.phone_num;
+    string email = Model.email;
+    string login = Model.login;
+    string password = Model.password;
+    Get.Value = Model.user_id;
+
+}
+<h1>Редактирование личной информации</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="user_id" />
+            <div class="form-group">
+                <input asp-for="right_id" class="form-control"  value="@right_id" hidden/>
+            </div>
+            <div class="form-floating">
+                <input asp-for="name" class="form-control" value="@name" />
+                <label asp-for="name" class="control-label"></label>
+               
+                <span asp-validation-for="name" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="surname" class="form-control" value="@surname" />
+                <label asp-for="surname" class="control-label"></label>
+               
+                <span asp-validation-for="surname" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="fathername" class="form-control" value="@fathername" />
+                <label asp-for="fathername" class="control-label"></label>
+                
+                <span asp-validation-for="fathername" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="sex_id" class="control-label"></label>
+                <select asp-for="sex_id">
+                    <option value="1">Женский</option>
+                    <option value="2">Мужской</option>
+                </select>
+                <span asp-validation-for="sex_id" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="date_of_birth" class="form-control" type="date" value="@date_of_birth" />
+                <label asp-for="date_of_birth" class="control-label"></label>
+
+                <span asp-validation-for="date_of_birth" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="phone_num" type="tel" class="form-control" value="@phone_num" />
+                <label asp-for="phone_num" class="control-label"></label>
+              
+                <span asp-validation-for="phone_num" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="email" class="form-control" value="@email" />
+                <label asp-for="email" class="control-label"></label>
+               
+                <span asp-validation-for="email" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="login" class="form-control" value="@login" />
+                <label asp-for="login" class="control-label"></label>
+                
+                <span asp-validation-for="login" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="password" class="form-control" value="@password" />
+                <label asp-for="password" class="control-label"></label>
+               
+                <span asp-validation-for="password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Сохранить" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.querySelector('.btn').addEventListener('click', function (event) {
+        var input1 = document.querySelector('.form-control[name="name"]');
+        var input2 = document.querySelector('.form-control[name="surname"]');
+        var input3 = document.querySelector('.form-control[name="fathername"]');
+        var input4 = document.querySelector('.form-control[name="date_of_birth"]');
+        var input5 = document.querySelector('.form-control[name="phone_num"]');
+        var input6 = document.querySelector('.form-control[name="email"]');
+        var input7 = document.querySelector('.form-control[name="login"]');
+        var input8 = document.querySelector('.form-control[name="password"]');
+        var name = '@name';
+        var surname = '@surname';
+        var fathername = '@fathername';
+        var date_of_birth = '@date_of_birth';
+        var phone_num = '@phone_num';
+        var email = '@email';
+        var login = '@login';
+        var password = '@password';
+        if (input1.value.trim() === '') {
+            input1.value = name;
+        }
+        if (input2.value.trim() === '') {
+            input2.value = surname;
+        }
+        if (input3.value.trim() === '') {
+            input3.value = fathername;
+        }
+        if (input4.value.trim() === '') {
+            input4.value = date_of_birth;
+        }
+        if (input5.value.trim() === '') {
+            input5.value = phone_num.replace(/&#x2B;/g, '+');
+        }
+        if (input6.value.trim() === '') {
+            input6.value = email;
+        }
+        if (input7.value.trim() === '') {
+            input7.value = login;
+        }
+        if (input8.value.trim() === '') {
+            input8.value = password;
+        }
+    });
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

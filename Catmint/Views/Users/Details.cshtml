@@ -1,0 +1,81 @@
+﻿@model Catmint.Models.User
+
+@{
+    ViewData["Title"] = "Details";
+    string sexName = Model.sex_id == 1 ? "Женский" : "Мужской";  
+}
+
+<h1>Информация о пользователе</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.sex_id)
+        </dt>
+        <dd class = "col-sm-10">
+            @sexName
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.surname)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.surname)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.fathername)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.fathername)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.date_of_birth)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.date_of_birth)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.phone_num)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.phone_num)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.email)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.login)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.login)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.password)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.password)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.cat_id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.cat_id)
+        </dd>
+    </dl>
+</div>
+<div class="d-flex justify-content-between">
+    <button onclick="location.href='@Url.Action("Edit", new { id = Model?.user_id })'" class="btn btn-primary mr-2">Редактировать</button>
+    <button onclick="location.href='@Url.Action("Delete", new { id = Model?.user_id })'" class="btn btn-primary mr-2">Удалить</button>
+
+    <button onclick="location.href='@Url.Action("Index", "Bookeds")'" class="btn btn-primary mr-2">Мои брони</button>
+    <button onclick="location.href='@Url.Action("Index", "Comments")'" class="btn btn-primary mr-2">Мои комментарии</button>
+</div>

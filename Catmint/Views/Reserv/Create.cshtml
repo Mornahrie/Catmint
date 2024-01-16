@@ -1,0 +1,95 @@
+﻿@using Catmint.ViewModels
+@using Catmint.Models
+@model ReservViewModel
+@{
+    ViewData["Title"] = "Details";
+    DateTime selectedDate = DateTime.Now;
+    bool CheckTimeExists(DateTime enteredTime)
+    {
+        foreach (Booked p in Model.Booked)
+        {
+            if (p.booked_date == enteredTime)
+            {               
+                return true; // Если время совпадает, возвращаем true
+            }
+        }
+        return false; // Если время не найдено, возвращаем false
+    }
+}
+
+
+<h4>Bookeds</h4>
+<hr />
+
+@{
+    if(Get.ifChosen == 0)
+    {
+        <label>Выберите столик:</label>
+        <form action="Choose">
+            <select name="tableid" id="tableSelect" class="form-control">
+                @foreach (Tables t in Model.Tables)
+                {
+                    <option value="@t.table_id">Столик @t.table_id Вместимость: @t.capacity </option>
+                    //передаю номер столика
+                }
+            </select>
+
+            <input type="date" name="dateInput" id="dateInput" value="@selectedDate.ToString("yyyy-MM-dd")">
+
+            <button type="submit" class="btn btn-primary">Выбрать</button>
+        </form>
+    }
+}
+@{
+    if(Get.ifChosen == 1)
+    {
+        <h2>Расписание столика @Get.table_num для @Get.ForBookTime.ToString("dd.MM.yyyy")</h2>
+
+        <button type="submit" class="btn btn-primary" onclick="showTable()">Найти</button>
+
+        <div id="tableContainer" style="display:none">
+            <table class="table">
+                @for (int hour = 9; hour <= 18; hour++)
+                {
+                    <tr>
+                        <td>@hour:00</td>
+                        <td>
+                        <td>@Get.ForBookTime.ToString("dd.MM.yyyy")</td>
+                        <td>
+                                @{
+                                    DateTime newDateTime = Get.ForBookTime.AddHours(hour);
+
+                                    //Console.WriteLine(newDateTime.ToString());
+                                    if (Get.ID == 0)
+                                    {
+                                        <button onclick="location.href='@Url.Action("Create", "Bookeds")'" class="btn bron" disabled style="background-color:lightgray">Забронировать</button>
+                                    }
+                                    else
+                                    {
+
+                                        if (!CheckTimeExists(newDateTime))
+                                        {
+                                            Get.BookTime = newDateTime;
+                                            <button onclick="location.href='@Url.Action("Create", "Bookeds")'" class="bron">Забронировать</button>
+                                        }
+                                        else
+                                        {
+                                            <button onclick="location.href='@Url.Action("Create", "Bookeds")'" class="btn bron" disabled style="background-color:lightgray">Забронировать</button>
+                                        }
+                                    }
+                                }
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+
+    }
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+    }
+}

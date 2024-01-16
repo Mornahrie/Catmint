@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Catmint.Models.Booked>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Брони</h1>
+
+<p>
+    <button onclick="location.href='@Url.Action("Create", "Reserv")'" class="btn btn-primary mr-2">Забронировать</button>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.table_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.user_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.booked_date)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Get.ID != 5) // не admin
+        {
+            foreach (var item in Model)
+            {
+                if (item.user_id == Get.ID)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.table_id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.booked_date)
+                        </td>
+                        <td>
+                            <a asp-action="Delete" asp-route-id="@item.book_id">Удалить</a>
+                        </td>
+                    </tr>
+                }
+            }
+        }
+        else
+        {
+        foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.table_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.user_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.booked_date)
+            </td>
+            <td>
+                <a asp-action="Delete" asp-route-id="@item.book_id">Удалить</a>
+            </td>
+        </tr>
+        }
+        }
+
+    </tbody>
+</table>

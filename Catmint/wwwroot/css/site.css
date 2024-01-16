@@ -1,4 +1,4 @@
-html {
+﻿html {
   font-size: 14px;
 }
 
@@ -9,10 +9,252 @@ html {
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
+.navbar, .navbar-toggler {
+    background-color: #510f2f;
+}
+
+
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-color: #ffe4e6;
+/*    background-image: url("/photos/back.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;*/
+}
+
+.bron {
+    background-color: #fff6fc;
+    border: 4px solid #510f2f;
+    color: #510f2f;
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 400;
+    letter-spacing: 0.125em;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    white-space: nowrap;
+    font-size: 0.75rem;
+    max-width: 20rem;
+    height: 3.75em;
+    line-height: 3.75em;
+    border-radius: 3.75em;
+    padding: 0 2.5em;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+input[type="submit" i] {
+    border: 0;
+    background-color: #510f2f;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 400;
+    letter-spacing: 0.125em;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    white-space: nowrap;
+    font-size: 0.75rem;
+    max-width: 20rem;
+    height: 3.75em;
+    line-height: 3.75em;
+    border-radius: 3.75em;
+    padding: 0 2.5em;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+input[type="submit"]:hover{
+    background-color: #e52d86;
+}
+
+input[type="submit" i],.btn{
+    border: 0;
+    background-color: #510f2f;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 400;
+    letter-spacing: 0.125em;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    white-space: nowrap;
+    font-size: 0.75rem;
+    max-width: 20rem;
+    height: 3.75em;
+    line-height: 3.75em;
+    border-radius: 3.75em;
+    padding: 0 2.5em;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+input[type="submit"]:hover, .btn:hover 
+{
+    background-color: #e52d86;
+    color: #fff6fc;
+ }
+
+input{
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+select {
+    margin-top: 12px;
+    margin-bottom: 24px;
+}
+
+.form-floating {
+    position: relative;
+}
+
+.cat-details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* Равномерное распределение по вертикали с равными промежутками между элементами */
+}
+
+.cat-block {
+    position: relative;
+    flex: 0 0 calc(23% - 10px);
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    margin-right: 35px;
+    height: 400px;
+    width: 200px;
+}
+
+.cat-image {
+    flex: 0 0 80%;
+    position: relative;
+    overflow: hidden; 
+    border-radius: 10px 10px 0 0; 
+}
+
+.cat-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cat-info {
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    align-items: center;
+}
+.main-block-ph img {
+    width: 100%;
+}
+
+.comm-block {
+    width: 100%;
+    border-radius: 10px;
+    background-color: #510f2f;
+    color: #fff6fc;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.user-block {
+    float: left;
+    margin-left: 5px;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-weight: bold;
+}
+
+.rank-block {
+    float: right;
+    color: yellow;
+}
+
+.comment-block {
+    color: #510f2f;
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+    clear: both;
+}
+
+
+.rating-result {
+    width: 150px;
+    margin: 0 auto;
+}
+
+.rating-result span {
+    padding: 0;
+    font-size: 24px;
+    margin: 0 3px;
+    line-height: 1;
+    color: lightgrey;
+    text-shadow: 1px 1px #bbb;
+}
+
+.rating-result > span:before {
+    content: '★';
+}
+
+.rating-result > span.active {
+    color: gold;
+    text-shadow: 1px 1px #c60;
+}
+
+.rating-area {
+    overflow: hidden;
+    width: 265px;
+    margin: 0 auto;
+}
+
+.rating-area:not(:checked) > input {
+    display: none;
+}
+
+.rating-area:not(:checked) > label {
+    float: right;
+    width: 42px;
+    padding: 0;
+    cursor: pointer;
+    font-size: 32px;
+    line-height: 32px;
+    color: lightgrey;
+    text-shadow: 1px 1px #bbb;
+}
+
+.rating-area:not(:checked) > label:before {
+    content: '★';
+}
+
+.rating-area > input:checked ~ label {
+     color: gold;
+     text-shadow: 1px 1px #c60;
+}
+
+.rating-area:not(:checked) > label:hover,
+.rating-area:not(:checked) > label:hover ~ label {
+    color: gold;
+}
+
+.rating-area > input:checked + label:hover,
+.rating-area > input:checked + label:hover ~ label,
+.rating-area > input:checked ~ label:hover,
+.rating-area > input:checked ~ label:hover ~ label,
+.rating-area > label:hover ~ input:checked ~ label {
+    color: gold;
+    text-shadow: 1px 1px goldenrod;
+}
+
+.rate-area > label:active {
+    position: relative;
 }

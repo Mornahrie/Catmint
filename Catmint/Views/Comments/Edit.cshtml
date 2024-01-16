@@ -1,0 +1,106 @@
+﻿@model Catmint.Models.Comment
+
+@{
+    ViewData["Title"] = "Edit";
+    int user_id = Model.user_id;
+    int rank = Model.rank;
+    string comment_text = Model.comment_text;
+    int modered = Model.modered;
+    Console.WriteLine("id " + user_id.ToString());
+    Console.WriteLine("rank " + rank.ToString());
+    Console.WriteLine("comm " + comment_text);
+    Console.WriteLine("mod " + modered.ToString());
+}
+
+<h1>Редактировать отзыв</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="comm_id" />
+            <div class="form-group" hidden>
+                <label asp-for="user_id" class="control-label"></label>
+                <input asp-for="user_id" class="form-control" value="@user_id" />
+                <span asp-validation-for="user_id" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <select asp-for="rank" class="form-control" style="margin-top: 12px; margin-bottom: 24px;" value="@rank">
+                    <option value="1">★</option>
+                    <option value="2">★★</option>
+                    <option value="3">★★★</option>
+                    <option value="4">★★★★</option>
+                    <option value="5">★★★★★</option>
+                </select>
+                <label asp-for="rank" class="control-label"></label>
+                <span asp-validation-for="rank" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="comment_text" class="form-control" value="@comment_text" />
+                <label asp-for="comment_text" class="control-label"></label>
+                <span asp-validation-for="comment_text" class="text-danger"></span>
+            </div>
+            @if (Get.Privelege != 1) // не admin
+            {
+                <div class="form-floating" hidden>
+                    @* эдит тоже на модерацию *@
+                    <input asp-for="modered" class="form-control" value="@modered" />
+                    <label asp-for="modered" class="control-label"></label>
+                    <span asp-validation-for="comment_text" class="text-danger"></span>
+                </div>
+            }
+            else if (Get.Privelege == 1)//admin
+            {
+                <div class="form-floating">
+                    @* эдит тоже на модерацию *@
+                    <select asp-for="modered" class="form-control" value="@modered">
+                        <option value="1">На модерации</option>
+                        <option value="2">Прошел модерацию</option>
+                        <option value="3">Не прошел модерацию</option>
+                    </select>
+                    <label asp-for="modered" class="control-label"></label>
+                    <span asp-validation-for="comment_text" class="text-danger"></span>
+                </div>
+            }
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<script>
+    document.querySelector('.btn').addEventListener('click', function (event) {
+        var input1 = document.querySelector('.form-control[name="user_id"]');
+        var input2 = document.querySelector('.form-control[name="rank"]');
+        var input3 = document.querySelector('.form-control[name="comment_text"]');
+        var input4 = document.querySelector('.form-control[name="modered"]');
+        var user_id = '@user_id';
+        var rank = '@rank';
+        var comment_text = '@comment_text';
+        var modered = '@modered';
+
+        if (input1.value.trim() === '') {
+            input1.value = user_id;
+        }
+        if (input2.value.trim() === '') {
+            input2.value = rank;
+        }
+        if (input3.value.trim() === '') {
+            input3.value = comment_text;
+        }
+        if (input4.value.trim() === '') {
+            input4.value = modered;
+        }
+    });
+</script>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
